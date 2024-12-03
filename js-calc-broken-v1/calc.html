@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="num1" />
+    <input type="text" id="operator" />
+    <input type="text" id="num2" />
+    <button id="btn">Rēķināt</button>
+    <p id="output"></p>
+
+    <script>
+      let num1Input = document.getElementById("num1");
+      let operatorInput = document.getElementById("operator");
+      let num2Input = document.getElementById("num2");
+      let btn = document.getElementById("btn");
+
+      btn.addEventListener("click", handleClick);
+
+      function handleClick() {
+        let num1 = parseInt(num1Input.value);
+        let num2 = parseInt(num2Input.value);
+        let operator = operatorInput.value;
+
+        //lietotāja ievades pārbaude/validācija:
+
+        //testa kļūdu masīvs:
+
+        let errors = [
+          "Pirmais skaitlis nav ievadīts",
+          "Otrais skaitlis nav ievadīts",
+          "Kļūdains operators",
+        ];
+
+        let result;
+
+        if (errors.length == 0) {
+          let result = calc(num1, num2, operator);
+        } else {
+          let errorMesssage = "";
+          for (let i = 0; i < errors.length; i++) {
+            errorMesssage = errorMesssage + " " + errors[i];
+          }
+          result = errorMesssage;
+        }
+
+        output.innerHTML = `Rezultāts: ${result}`;
+
+        function calc(n1, n2, op) {
+          switch (op) {
+            case "+":
+              return n1 + n2;
+            case "-":
+              return n1 - n2;
+            case "*":
+              return n1 * n2;
+            case "/":
+              return n1 / n2;
+
+            default:
+              return "Kļūdaina darbība";
+          }
+        }
+      }
+      //     if (op == "+") {
+      //       return n1 + n2;
+      //     } if (op == "-") {
+      //       return n1 - n2;
+      //     } if (op == "*") {
+      //       return n1 * n2;
+      //     } if (op == "/") {
+      //       return n1 / n2;
+      //     }
+      //   }
+      //before shortening if .. else:
+      //   function calc(n1, n2, op) {
+      //     if (op == "+") {
+      //       return n1 + n2;
+      //     } if (op == "-") {
+      //       return n1 - n2;
+      //     } if (op == "*") {
+      //       return n1 * n2;
+      //     } if (op == "/") {
+      //       return n1 / n2;
+      //     }
+      //   }
+      // }
+      //before Refactoring:
+      //   if (operator == "+") {
+      //     result = `Rezultāts: ${num1 + num2}`;
+      //   } else if (operator == "-") {
+      //     result = `Rezultāts: ${num1 - num2}`;
+      //   } else if (operator == "*") {
+      //     result = `Rezultāts: ${num1 * num2}`;
+      //   } else if (operator == "/") {
+      //     result = `Rezultāts: ${num1 / num2}`;
+      //   }
+
+      //   output.innerHTML = result;
+      // }
+    </script>
+  </body>
+</html>
